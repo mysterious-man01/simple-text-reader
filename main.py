@@ -5,7 +5,7 @@ from time import sleep
 docname = ''
 while True:
     # Menu principal
-    shell = asets.menu(['Ver documento', 'Editar documento', 'Sair do programa'])
+    shell = asets.menu(['Ver arquivo', 'Editar arquivo', 'Sair do programa'], "Menu")
     sleep(0.3)
 
     # Opção 2: sair do programa
@@ -31,7 +31,7 @@ while True:
         diretorio = listdir()
         arq = asets.docfreq(diretorio)
         if len(arq) >= 1:
-            arq.append('Não usar documento existente')
+            arq.append('Não usar arquivo existente')
             posi = asets.menu(arq, 'Escolha uma opção:')
             docname = arq[posi]
             sleep(0.3)
@@ -40,22 +40,23 @@ while True:
             text = input('>')
             doc.write(f'{text}\n')
             doc.close()
-            asets.color('Documento atualizado com sucesso', 'green')
+            asets.color('Arquivo atualizado com sucesso', 'green')
             sleep(0.2)
         else:
-            asets.color('O arquivo de cadastro não foi encontrado...', 'yellow')
+            asets.color('O arquivo não foi encontrado...', 'yellow')
             while True:
-                shell = input('Deseja criar o arquivo de cadastro?(s/n):\n>').strip().lower()[0]
+                shell = input('Deseja criar o arquivo?(s/n):\n>').strip().lower()[0]
                 if shell == 'n': break
                 elif shell == 's':
                     arqname = input('Nome do arquivo: ')
-                    if arqname not in diretorio:
+                    if f"{arqname}.txt" in diretorio:
                         while True:
                             asets.color('Um arquivo de mesmo nome foi encontrado.\ndeseja substituir?(s/n):')
                             shell = input('>').strip().lower()[0]
                             if shell == 'n': break
                             if shell == 's':
                                 asets.docgenerete(arqname)
+                                break
                             asets.color('Comando inválido...', 'red')
                     else: asets.docgenerete(arqname)
                     sleep(0.2)

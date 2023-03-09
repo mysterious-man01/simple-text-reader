@@ -20,7 +20,7 @@ def color(msg, color='preset', background='preset', end='\n'):
         print(f'{msg}\033[m', end=end)
 
 
-def menu(lista, msg='Opções'):
+def menu(lista, msg=''):
     print('*' * 30)
     print(f'{msg:^30}')
     print('*' * 30)
@@ -30,7 +30,7 @@ def menu(lista, msg='Opções'):
     while True:
         try:
             shell = int(input('>'))
-        except (Exception, TypeError, ValueError) as erro:
+        except(Exception, TypeError, ValueError) as erro:
             color(f'Tipo de erro: {erro.__class__}', 'red')
             color(f'ERRO: O valor informado não é um número', 'red')
         else:
@@ -38,7 +38,7 @@ def menu(lista, msg='Opções'):
             color(f'"{shell}" não é uma opção válida...', 'red')
 
 
-def docgenerete(name='.'):
+def docgenerete(name=''):
     try:
         doc = open(f'{name}.txt', 'wt+')
         doc.close()
@@ -47,9 +47,9 @@ def docgenerete(name='.'):
     else: color('Arquivo criado com sucesso', 'green')
 
 
-def docfreq(lista, ex='.txt'):
+def docfreq(lista, extension='.txt'):
     arqs = list()
     for item in lista:
-        if ex in item:
+        if extension in item:
             arqs.append(item)
     return arqs
